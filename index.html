@@ -11,39 +11,60 @@
     <style>
         body {
             font-family: 'Playfair Display', serif;
-            background-color: #F0F8FF; /* Biru muda */
+            /* Ubah background di sini dengan URL gambar JPG Anda */
+            background-image: url('foto2.jpg'); /* Ganti dengan URL JPG background yang diinginkan */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: #333;
             line-height: 1.6;
         }
         .cover-img {
             max-width: 100%;
+            max-height: 60vh; /* Diperkecil dari 80vh ke 60vh untuk ukuran yang lebih kecil */
+            width: auto;
             height: auto;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 50%; /* Bentuk bulat */
+            border: 5px solid #007BFF; /* Bingkai biru tebal */
+            object-fit: cover; /* Agar gambar tidak terdistorsi */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
         }
         .countdown {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin: 30px 0;
-            flex-wrap: wrap; /* Responsif untuk mobile */
+            flex-wrap: wrap;
         }
         .counter {
             text-align: center;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid #007BFF; /* Biru */
-            min-width: 80px; /* Agar tidak terlalu kecil di mobile */
+            border: 1px solid #007BFF;
+            min-width: 80px;
         }
         .section {
-            padding: 30px 20px; /* Padding lebih besar untuk mobile */
+            padding: 30px 20px;
             margin: 20px 0;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             border: 1px solid #E0E0E0;
+            position: relative;
+        }
+   
+        .section::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #007BFF, transparent);
         }
         .backsound {
             position: fixed;
@@ -59,24 +80,35 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border: 2px solid #007BFF; /* Biru */
+            border: 2px solid #007BFF;
         }
         .backsound i {
             font-size: 24px;
-            color: #007BFF; /* Biru */
+            color: #007BFF;
         }
         .event-card {
-            background-color: #FAFAFA;
-            border: 1px solid #007BFF; /* Biru */
+            background-color: rgba(250, 250, 250, 0.9);
+            border: 1px solid #007BFF;
             border-radius: 15px;
             padding: 25px;
             text-align: center;
             margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #007BFF, transparent);
         }
         .event-card i {
             font-size: 40px;
-            color: #007BFF; /* Biru */
+            color: #007BFF;
             margin-bottom: 15px;
         }
         .event-card h4 {
@@ -93,26 +125,41 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 1px solid #007BFF; /* Biru */
+            border: 1px solid #007BFF;
         }
         h1, h2, h3, h4 {
             color: #333;
             font-weight: 700;
         }
         .btn-primary {
-            background-color: #007BFF; /* Biru */
-            border-color: #007BFF; /* Biru */
+            background-color: #007BFF;
+            border-color: #007BFF;
             border-radius: 25px;
             font-family: 'Playfair Display', serif;
             padding: 10px 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .btn-primary:hover {
-            background-color: #0056b3; /* Biru gelap */
-            border-color: #0056b3; /* Biru gelap */
+            background-color: #0056b3;
+            border-color: #0056b3;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
         .modal-content {
             border-radius: 20px;
-            border: 1px solid #007BFF; /* Biru */
+            border: 1px solid #007BFF;
+            background: linear-gradient(135deg, #E0F7FA, #B3E5FC); /* Gradien biru untuk background cover */
+        }
+        .invitation-text {
+            font-size: 18px;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        .child-name {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            color: #007BFF;
+            margin: 20px 0;
         }
         /* Responsif untuk mobile */
         @media (max-width: 768px) {
@@ -136,6 +183,15 @@
             .backsound i {
                 font-size: 20px;
             }
+            .invitation-text {
+                font-size: 16px;
+            }
+            .child-name {
+                font-size: 20px;
+            }
+            .cover-img {
+                max-height: 40vh; /* Diperkecil lagi untuk mobile dari 60vh ke 40vh */
+            }
         }
     </style>
 </head>
@@ -146,9 +202,9 @@
             <div class="modal-content">
                 <div class="modal-body d-flex justify-content-center align-items-center">
                     <div class="text-center">
+                        <img src="foto .jpg" alt="Cover Image" class="cover-img mb-3">
                         <h1 class="mb-3">Walimatul Khitan</h1>
                         <p class="mb-3">Kepada Yth. Penerima Undangan</p>
-                        <img src="c" alt="Cover Image" class="cover-img mb-3">
                         <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">Buka Undangan</button>
                     </div>
                 </div>
@@ -160,9 +216,9 @@
     <div class="container mt-5">
         <!-- Cover Section -->
         <section class="section text-center">
+            <img src="foto .jpg" alt="Cover" class="cover-img">
             <h2>Walimatul Khitan</h2>
-            <img src="images.jpeg" alt="Cover" class="cover-img">
-            <h3>Belum Diatur</h3>
+            <h3>MUHAMMAD AFTHAR</h3>
             <p>Acara akan dimulai dalam</p>
             <div class="countdown">
                 <div class="counter">
@@ -187,10 +243,10 @@
         <!-- Perihal Section -->
         <section class="section">
             <h2 class="text-center">Assalamualaikum Wr.Wb.</h2>
-            <p>Dengan segala kerendahan hati, saya mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara khitanan anak kami.</p>
-            <h3>Belum Diatur</h3>
-            <p>Putra dari Tedy indralis & ibu Riska safitri</p>
-            <p>Kami sangat berharap Bapak/Ibu/Saudara/i dapat menghadiri acara tersebut.</p>
+            <p class="invitation-text">Dengan rasa syukur kepada Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara khitanan anak kami. Kehadiran Anda akan menambah keceriaan acara.</p>
+            <h3 style="text-align: center;">Putra Dari Pasangan</h3> <!-- Ditambahkan style text-align: center untuk membuatnya di tengah -->
+            <p class="child-name"> Tedy indralis & ibu Riska safitri</p>
+            <p class="invitation-text">Kami harap Anda dapat hadir dan memberikan doa terbaik. Terima kasih atas perhatiannya.</p>
         </section>
 
         <!-- Acara Section -->
@@ -222,8 +278,6 @@
         <section class="section text-center">
             <p>Atas kehadirannya kami ucapkan Jazakumullah Khairan</p>
             <p>Hormat Kami,</p>
-            <h3>Keluarga Ananda</h3>
-            <p>Belum Diatur</p>
         </section>
     </div>
 
@@ -235,7 +289,6 @@
 
     <audio id="audio" loop>
         <source src="audio.mp3" type="audio/mpeg">
-        Browser Anda tidak mendukung elemen audio.
     </audio>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -265,6 +318,7 @@
             }
         }, 1000);
 
+        // Kontrol Backsound
         var audio = document.getElementById('audio');
         var backsound = document.getElementById('backsound');
         var playIcon = document.getElementById('playIcon');
@@ -284,7 +338,7 @@
             }
         });
 
-
+        // Auto play saat modal dibuka (opsional)
         document.getElementById('coverModal').addEventListener('hidden.bs.modal', function() {
             audio.play();
             playIcon.style.display = 'none';
