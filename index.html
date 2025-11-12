@@ -3,32 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Undangan Walimatul Khitan">
-    <title>Walimatul Khitan</title>
+    <meta name="description" content="Undangan Tasyakuran 1 Tahun & Aqiqah">
+    <title>Tasyakuran & Aqiqah</title>
+    <!-- Load Tailwind CSS for modern utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap CSS (untuk modal dan layout responsif) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Jockey One Font (Font Pilihan Anak-Anak) -->
+    <link href="https://fonts.googleapis.com/css2?family=Jockey+One&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            font-family: 'Playfair Display', serif;
-            /* Ubah background di sini dengan URL gambar JPG Anda */
-            background-image: url('foto2.jpg'); /* Ganti dengan URL JPG background yang diinginkan */
+            font-family: 'Jockey One', sans-serif; /* Font baru */
+            /* Placeholder Background untuk body utama */
+            background-image: url('https://placehold.co/1920x1080/E0F7FA/007BFF?text=Sky+Background'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
         }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Jockey One', sans-serif;
+            text-transform: uppercase;
+        }
+
         .cover-img {
             max-width: 100%;
-            max-height: 60vh; /* Diperkecil dari 80vh ke 60vh untuk ukuran yang lebih kecil */
+            max-height: 60vh; 
             width: auto;
             height: auto;
-            border-radius: 50%; /* Bentuk bulat */
-            border: 5px solid #007BFF; /* Bingkai biru tebal */
-            object-fit: cover; /* Agar gambar tidak terdistorsi */
+            border-radius: 50%; 
+            border: 5px solid #007BFF; 
+            object-fit: cover; 
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             margin-bottom: 20px;
+        }
+        .cover-container {
+            position: relative; 
+            display: inline-block; 
+            z-index: 2; 
+        }
+
+        /* AWAN OVERLAY UNTUK MODAL (COVER) */
+        #coverModal .awan-overlay {
+            position: absolute;
+            opacity: 0.9; /* Lebih pekat */
+            z-index: 1; /* Di bawah teks/foto utama */
+            pointer-events: none; 
+            border-radius: 50%; 
+            object-fit: contain; 
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.1)); 
+        }
+        
+        /* Awan 1 (Kiri Atas Cover Modal) - Di luar zona foto */
+        #coverModal .awan-kiri-atas { top: -70px; left: -80px; width: 180px; height: 120px; } 
+        /* Awan 2 (Kanan Atas Cover Modal) - Di luar zona foto */
+        #coverModal .awan-kanan-atas { top: -30px; right: -90px; width: 200px; height: 140px; } 
+        /* Awan 3 (Kiri Bawah Cover Modal) - Di luar zona foto */
+        #coverModal .awan-kiri-bawah { bottom: -50px; left: -60px; width: 160px; height: 110px; } 
+        /* Awan 4 (Kanan Bawah Cover Modal) - Di luar zona foto */
+        #coverModal .awan-kanan-bawah { bottom: -80px; right: -70px; width: 190px; height: 130px; } 
+
+        /* Untuk awan di section utama (hanya placeholder, awan di sini lebih kecil) */
+        .section .awan-overlay {
+            position: absolute;
+            width: 100px; /* Lebih kecil dari cover */
+            height: auto;
+            opacity: 0.7; 
+            z-index: 1; 
+            pointer-events: none; 
+            border-radius: 50%; 
+            object-fit: contain; 
+        }
+        .section .awan-kiri-atas { top: 5%; left: 5%; }
+        .section .awan-kanan-atas { top: 10%; right: 5%; }
+        .section .awan-kiri-bawah { bottom: 5%; left: 10%; }
+        .section .awan-kanan-bawah { bottom: 10%; right: 10%; }
+
+
+        /* Pastikan teks dan tombol di modal berada di atas awan */
+        #coverModal .modal-body > div {
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Class Bootstrap yang disimulasikan/dipertahankan */
+        .btn-primary {
+            background-color: #007BFF;
+            border-color: #007BFF;
+            border-radius: 25px;
+            font-family: 'Jockey One', sans-serif; /* Font baru */
+            padding: 10px 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            color: white;
+            transition: all 0.3s;
+            border-width: 0; 
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Class styling utama */
+        .section {
+            padding: 30px 20px;
+            margin: 20px auto; 
+            max-width: 800px; 
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid #E0E0E0;
+            position: relative;
+        }
+        .section::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #007BFF, transparent);
         }
         .countdown {
             display: flex;
@@ -46,46 +147,6 @@
             border: 1px solid #007BFF;
             min-width: 80px;
         }
-        .section {
-            padding: 30px 20px;
-            margin: 20px 0;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border: 1px solid #E0E0E0;
-            position: relative;
-        }
-   
-        .section::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #007BFF, transparent);
-        }
-        .backsound {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border: 2px solid #007BFF;
-        }
-        .backsound i {
-            font-size: 24px;
-            color: #007BFF;
-        }
         .event-card {
             background-color: rgba(250, 250, 250, 0.9);
             border: 1px solid #007BFF;
@@ -96,75 +157,41 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             position: relative;
         }
-        .event-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(to right, transparent, #007BFF, transparent);
-        }
         .event-card i {
             font-size: 40px;
             color: #007BFF;
             margin-bottom: 15px;
         }
-        .event-card h4 {
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        .event-card p {
-            color: #666;
-            margin: 0;
-            font-size: 16px;
-        }
-        .map-container {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 1px solid #007BFF;
-        }
-        h1, h2, h3, h4 {
-            color: #333;
-            font-weight: 700;
-        }
-        .btn-primary {
-            background-color: #007BFF;
-            border-color: #007BFF;
-            border-radius: 25px;
-            font-family: 'Playfair Display', serif;
-            padding: 10px 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-        }
-        .modal-content {
-            border-radius: 20px;
-            border: 1px solid #007BFF;
-            background: linear-gradient(135deg, #E0F7FA, #B3E5FC); /* Gradien biru untuk background cover */
-        }
-        .invitation-text {
-            font-size: 18px;
-            text-align: justify;
-            margin-bottom: 20px;
-        }
         .child-name {
-            font-size: 24px;
+            font-size: 28px; /* Lebih besar */
             font-weight: 700;
             text-align: center;
             color: #007BFF;
             margin: 20px 0;
         }
+        .backsound {
+            display: none; 
+        }
+
+        /* MODAL COVER CUSTOM STYLE */
+        #coverModal .modal-content {
+            background-color: #A7D9F8; /* Warna biru untuk latar belakang modal cover */
+            background-image: url('foto2.jpg'); /* Placeholder background untuk cover */
+            background-size: cover;
+            background-position: center;
+            border: none;
+        }
+        #coverModal .modal-title, #coverModal h1, #coverModal h2, #coverModal p {
+            color: #004080; /* Teks lebih gelap agar kontras dengan biru */
+            z-index: 10;
+            position: relative;
+        }
+
         /* Responsif untuk mobile */
         @media (max-width: 768px) {
             .section {
                 padding: 20px 15px;
+                margin: 20px 10px;
             }
             .event-card {
                 padding: 20px;
@@ -176,34 +203,37 @@
                 padding: 15px;
                 min-width: 70px;
             }
-            .backsound {
-                width: 50px;
-                height: 50px;
-            }
-            .backsound i {
-                font-size: 20px;
-            }
-            .invitation-text {
-                font-size: 16px;
-            }
-            .child-name {
-                font-size: 20px;
-            }
             .cover-img {
-                max-height: 40vh; /* Diperkecil lagi untuk mobile dari 60vh ke 40vh */
+                max-height: 40vh;
             }
+
+            /* Awan di modal cover untuk mobile */
+            #coverModal .awan-kiri-atas { top: -40px; left: -50px; width: 120px; height: 80px; }
+            #coverModal .awan-kanan-atas { top: -10px; right: -60px; width: 140px; height: 90px; }
+            #coverModal .awan-kiri-bawah { bottom: -30px; left: -40px; width: 110px; height: 75px; }
+            #coverModal .awan-kanan-bawah { bottom: -50px; right: -50px; width: 130px; height: 85px; }
         }
     </style>
 </head>
-<body>
+<body class="p-0 m-0">
     <!-- Modal Cover -->
     <div class="modal fade" id="coverModal" tabindex="-1" aria-labelledby="coverModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-body d-flex justify-content-center align-items-center">
                     <div class="text-center">
-                        <img src="foto .jpg" alt="Cover Image" class="cover-img mb-3">
-                        <h1 class="mb-3">Walimatul Khitan</h1>
+                        <div class="cover-container">
+                            <!-- FOTO ANAK (Placeholder - URL tidak diubah) -->
+                            <img src="foto23.png" alt="Cover Image" class="cover-img mb-3">
+                            
+                            <!-- AWAN Placeholder (URL tidak diubah) -->
+                            <img src="https://placehold.co/200x150/87CEEB/000000?text=Awan" alt="Awan Kiri Atas" class="awan-overlay awan-kiri-atas">
+                            <img src="awan.png" alt="Awan Kanan Atas" class="awan-overlay awan-kanan-atas">
+                            <img src="awan.png" alt="Awan Kiri Bawah" class="awan-overlay awan-kiri-bawah">
+                            <img src="awan.png" alt="Awan Kanan Bawah" class="awan-overlay awan-kanan-bawah">
+                        </div>
+                        <h1 class="mb-3">TASYAKURAN 1 TAHUN & AQIQAH</h1>
+                        <h2 class="mb-3" style="color: #004080;">MUHAMMAD AFTHAR</h2>
                         <p class="mb-3">Kepada Yth. Penerima Undangan</p>
                         <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">Buka Undangan</button>
                     </div>
@@ -213,11 +243,20 @@
     </div>
 
     <!-- Konten Utama -->
-    <div class="container mt-5">
-        <!-- Cover Section -->
+    <div class="container mx-auto px-4 mt-5">
+        <!-- Cover Section (Halaman Setelah Modal) -->
         <section class="section text-center">
-            <img src="foto .jpg" alt="Cover" class="cover-img">
-            <h2>Walimatul Khitan</h2>
+            <div class="cover-container">
+                <!-- FOTO ANAK (Placeholder - URL tidak diubah) -->
+                <img src="foto23.png" alt="Cover" class="cover-img">
+                
+                <!-- AWAN (URL tidak diubah) -->
+                <img src="awan.png" alt="Awan Kiri Atas" class="awan-overlay awan-kiri-atas">
+                <img src="awan.png" alt="Awan Kanan Atas" class="awan-overlay awan-kanan-atas">
+                <img src="awan.png" alt="Awan Kiri Bawah" class="awan-overlay awan-kiri-bawah">
+                <img src="awan.png" alt="Awan Kanan Bawah" class="awan-overlay awan-kanan-bawah">
+            </div>
+            <h2>TASYAKURAN 1 TAHUN & AQIQAH</h2>
             <h3>MUHAMMAD AFTHAR</h3>
             <p>Acara akan dimulai dalam</p>
             <div class="countdown">
@@ -243,17 +282,17 @@
         <!-- Perihal Section -->
         <section class="section">
             <h2 class="text-center">Assalamualaikum Wr.Wb.</h2>
-            <p class="invitation-text">Dengan rasa syukur kepada Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara khitanan anak kami. Kehadiran Anda akan menambah keceriaan acara.</p>
-            <h3 style="text-align: center;">Putra Dari Pasangan</h3> <!-- Ditambahkan style text-align: center untuk membuatnya di tengah -->
-            <p class="child-name"> Tedy indralis & ibu Riska safitri</p>
+            <p class="invitation-text">Dengan limpahan rahmat Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara **TASYAKURAN 1 TAHUN & AQIQAH** putra kami. Kehadiran dan doa restu Anda akan menjadi berkah bagi kami.</p>
+            <h3 style="text-align: center;">Putra Dari Pasangan</h3>
+            <p class="child-name"> Bapak Tedy Indralis & Ibu Riska Safitri</p>
             <p class="invitation-text">Kami harap Anda dapat hadir dan memberikan doa terbaik. Terima kasih atas perhatiannya.</p>
         </section>
 
         <!-- Acara Section -->
         <section class="section">
             <h2 class="text-center mb-4">Waktu dan Tempat</h2>
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row flex flex-wrap -mx-2">
+                <div class="col-md-6 w-full md:w-1/2 px-2">
                     <div class="event-card">
                         <i class="fas fa-clock"></i>
                         <h4>Waktu</h4>
@@ -261,11 +300,11 @@
                         <p>Pukul 10.00 - Selesai</p>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 w-full md:w-1/2 px-2">
                     <div class="event-card">
                         <i class="fas fa-map-marker-alt"></i>
                         <h4>Tempat</h4>
-                        <p>Jl. Dr. Wahidin</p>
+                        <p>Jl. Dr. Wahidin gang Todal</p>
                         <div class="map-container mt-3">
                             <iframe src="https://maps.google.com/maps?q=-3.0134250467707533,106.45916596750494&hl=id&z=20&output=embed" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
                         </div>
@@ -278,73 +317,49 @@
         <section class="section text-center">
             <p>Atas kehadirannya kami ucapkan Jazakumullah Khairan</p>
             <p>Hormat Kami,</p>
+            <p class="child-name">Tedy Indralis & Riska Safitri</p>
         </section>
     </div>
 
-    <!-- Backsound -->
-    <div class="backsound play" id="backsound">
-        <i class="fas fa-play" id="playIcon"></i>
-        <i class="fas fa-pause" id="pauseIcon" style="display: none;"></i>
-    </div>
-
-    <audio id="audio" loop>
-        <source src="audio.mp3" type="audio/mpeg">
-    </audio>
-
+    <!-- Script Bootstrap & Logic -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Tampilkan modal cover saat load
         document.addEventListener('DOMContentLoaded', function() {
-            var coverModal = new bootstrap.Modal(document.getElementById('coverModal'));
-            coverModal.show();
+            var coverModalElement = document.getElementById('coverModal');
+            if (coverModalElement) {
+                setTimeout(() => {
+                    var coverModal = new bootstrap.Modal(coverModalElement);
+                    coverModal.show();
+                }, 100);
+            }
         });
 
-        // Countdown Timer
-        var countDownDate = new Date('November 19, 2025 10:00:00').getTime();
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = countDownDate - now;
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById('days').innerHTML = days;
-            document.getElementById('hours').innerHTML = hours;
-            document.getElementById('minutes').innerHTML = minutes;
-            document.getElementById('seconds').innerHTML = seconds;
+    
+        const countDownDate = new Date('November 19, 2025 10:00:00').getTime();
+        let x = setInterval(function() {
+            const now = new Date().getTime();
+            let distance = countDownDate - now; 
+
             if (distance < 0) {
+                distance = 0;
                 clearInterval(x);
-                document.querySelector('.countdown').innerHTML = 'Acara telah dimulai!';
+                const countdownDiv = document.querySelector('.countdown');
+                countdownDiv.innerHTML = '<div class="text-lg font-bold text-blue-600 bg-white p-4 rounded-lg shadow-md">Acara telah dimulai!</div>';
+                return;
             }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerHTML = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerHTML = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
+
         }, 1000);
-
-        // Kontrol Backsound
-        var audio = document.getElementById('audio');
-        var backsound = document.getElementById('backsound');
-        var playIcon = document.getElementById('playIcon');
-        var pauseIcon = document.getElementById('pauseIcon');
-
-        backsound.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play();
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'inline';
-                backsound.classList.remove('play');
-            } else {
-                audio.pause();
-                playIcon.style.display = 'inline';
-                pauseIcon.style.display = 'none';
-                backsound.classList.add('play');
-            }
-        });
-
-        // Auto play saat modal dibuka (opsional)
-        document.getElementById('coverModal').addEventListener('hidden.bs.modal', function() {
-            audio.play();
-            playIcon.style.display = 'none';
-            pauseIcon.style.display = 'inline';
-            backsound.classList.remove('play');
-        });
     </script>
 </body>
 </html>
