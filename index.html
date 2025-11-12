@@ -52,8 +52,8 @@
         /* AWAN OVERLAY UNTUK MODAL (COVER) */
         #coverModal .awan-overlay {
             position: absolute;
-            opacity: 0.9; /* Lebih pekat */
-            z-index: 1; /* Di bawah teks/foto utama */
+            opacity: 0.9; 
+            z-index: 1; 
             pointer-events: none; 
             border-radius: 50%; 
             object-fit: contain; 
@@ -72,7 +72,7 @@
         /* Untuk awan di section utama (hanya placeholder, awan di sini lebih kecil) */
         .section .awan-overlay {
             position: absolute;
-            width: 100px; /* Lebih kecil dari cover */
+            width: 100px; 
             height: auto;
             opacity: 0.7; 
             z-index: 1; 
@@ -97,7 +97,7 @@
             background-color: #007BFF;
             border-color: #007BFF;
             border-radius: 25px;
-            font-family: 'Jockey One', sans-serif; /* Font baru */
+            font-family: 'Jockey One', sans-serif; 
             padding: 10px 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             color: white;
@@ -163,7 +163,7 @@
             margin-bottom: 15px;
         }
         .child-name {
-            font-size: 28px; /* Lebih besar */
+            font-size: 28px; 
             font-weight: 700;
             text-align: center;
             color: #007BFF;
@@ -175,16 +175,40 @@
 
         /* MODAL COVER CUSTOM STYLE */
         #coverModal .modal-content {
-            background-color: #A7D9F8; /* Warna biru untuk latar belakang modal cover */
-            background-image: url('biru.png'); /* Placeholder background untuk cover */
+            background-color: #A7D9F8; 
+            background-image: url('biru.png'); 
             background-size: cover;
             background-position: center;
             border: none;
         }
         #coverModal .modal-title, #coverModal h1, #coverModal h2, #coverModal p {
-            color: #004080; /* Teks lebih gelap agar kontras dengan biru */
+            color: #004080; 
             z-index: 10;
             position: relative;
+        }
+
+        /* FLOATING MUSIC BUTTON STYLE */
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000; /* Pastikan di atas semua elemen */
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #music-toggle:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
         }
 
         /* Responsif untuk mobile */
@@ -205,6 +229,13 @@
             }
             .cover-img {
                 max-height: 40vh;
+            }
+            #music-toggle {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
             }
 
             /* Awan di modal cover untuk mobile */
@@ -321,45 +352,99 @@
         </section>
     </div>
 
+    <!-- Elemen Audio untuk Musik Latar -->
+    <audio id="backsound" loop preload="auto">
+        <source src="audio.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- Floating Music Toggle Button -->
+    <div id="music-toggle" title="Putar/Hentikan Musik">
+        <i id="music-icon" class="fas fa-music"></i>
+    </div>
+
     <!-- Script Bootstrap & Logic -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Tampilkan modal cover saat load
         document.addEventListener('DOMContentLoaded', function() {
-            var coverModalElement = document.getElementById('coverModal');
+            const audio = document.getElementById('backsound');
+            const musicToggle = document.getElementById('music-toggle');
+            const musicIcon = document.getElementById('music-icon');
+            const coverModalElement = document.getElementById('coverModal');
+            let isPlaying = false;
+
+            // 1. Fungsi untuk mengubah status main/pause dan ikon
+            function toggleMusic() {
+                if (audio.paused) {
+                    audio.play()
+                        .then(() => {
+                            musicIcon.className = 'fas fa-volume-up';
+                            isPlaying = true;
+                        })
+                        .catch(error => {
+                            console.error('Gagal memutar audio:', error);
+                            // Jika play gagal, kembalikan ikon ke mute
+                            musicIcon.className = 'fas fa-volume-mute';
+                            isPlaying = false;
+                        });
+                } else {
+                    audio.pause();
+                    musicIcon.className = 'fas fa-volume-mute';
+                    isPlaying = false;
+                }
+            }
+
+            // Atur ikon awal ke MUTE (sebelum dimainkan)
+            musicIcon.className = 'fas fa-volume-mute';
+            
+            // 2. Tampilkan modal cover saat load
             if (coverModalElement) {
                 setTimeout(() => {
-                    var coverModal = new bootstrap.Modal(coverModalElement);
+                    const coverModal = new bootstrap.Modal(coverModalElement);
                     coverModal.show();
                 }, 100);
             }
+
+            // 3. Mulai musik setelah modal cover ditutup (Interaksi pengguna pertama)
+            coverModalElement.addEventListener('hidden.bs.modal', function () {
+                // Coba putar musik, ini dianggap interaksi pengguna
+                if (!isPlaying) {
+                    toggleMusic(); // Panggil toggle untuk mencoba play
+                }
+            });
+
+            // 4. Klik pada floating button
+            musicToggle.addEventListener('click', function() {
+                toggleMusic();
+            });
+
+
+            // Countdown Timer (Logika yang sama, sudah pakai let/const)
+            const countDownDate = new Date('November 19, 2025 10:00:00').getTime();
+            let x = setInterval(function() {
+                const now = new Date().getTime();
+                let distance = countDownDate - now; 
+
+                if (distance < 0) {
+                    distance = 0;
+                    clearInterval(x);
+                    const countdownDiv = document.querySelector('.countdown');
+                    countdownDiv.innerHTML = '<div class="text-lg font-bold text-blue-600 bg-white p-4 rounded-lg shadow-md">Acara telah dimulai!</div>';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').innerHTML = days < 10 ? '0' + days : days;
+                document.getElementById('hours').innerHTML = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
+
+            }, 1000);
         });
-
-    
-        const countDownDate = new Date('November 19, 2025 10:00:00').getTime();
-        let x = setInterval(function() {
-            const now = new Date().getTime();
-            let distance = countDownDate - now; 
-
-            if (distance < 0) {
-                distance = 0;
-                clearInterval(x);
-                const countdownDiv = document.querySelector('.countdown');
-                countdownDiv.innerHTML = '<div class="text-lg font-bold text-blue-600 bg-white p-4 rounded-lg shadow-md">Acara telah dimulai!</div>';
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').innerHTML = days < 10 ? '0' + days : days;
-            document.getElementById('hours').innerHTML = hours < 10 ? '0' + hours : hours;
-            document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
-
-        }, 1000);
     </script>
 </body>
 </html>
