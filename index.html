@@ -287,6 +287,8 @@
                 <img src="awan.png" alt="Awan Kiri Bawah" class="awan-overlay awan-kiri-bawah">
                 <img src="awan.png" alt="Awan Kanan Bawah" class="awan-overlay awan-kanan-bawah">
             </div>
+            <!-- TEXT UNDANGAN BARU DITAMBAHKAN -->
+            <p class="text-xl font-bold text-blue-700">UNDANGAN</p>
             <h2>TASYAKURAN 1 TAHUN & AQIQAH</h2>
             <h3>MUHAMMAD AFTHAR</h3>
             <p>Acara akan dimulai dalam</p>
@@ -337,7 +339,8 @@
                         <h4>Tempat</h4>
                         <p>Jl. Dr. Wahidin gang Todal</p>
                         <div class="map-container mt-3">
-                            <iframe src="https://maps.google.com/maps?q=-3.0134250467707533,106.45916596750494&hl=id&z=20&output=embed" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
+                            <!-- IFRAME MAPS SUDAH DIUPDATE DENGAN KOORDINAT ORIGINAL DAN ZOOM 17 -->
+                            <iframe src="https://maps.google.com/maps?q=-3.0134250467707533,106.45916596750494&hl=id&z=17&output=embed" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -410,17 +413,15 @@
             coverModalElement.addEventListener('hidden.bs.modal', function () {
                 // Coba putar musik, ini dianggap interaksi pengguna
                 if (!isPlaying) {
-                    toggleMusic(); // Panggil toggle untuk mencoba play
+                    toggleMusic(); 
                 }
             });
 
-            // 4. Klik pada floating button
             musicToggle.addEventListener('click', function() {
                 toggleMusic();
             });
 
 
-            // Countdown Timer (Logika yang sama, sudah pakai let/const)
             const countDownDate = new Date('November 19, 2025 10:00:00').getTime();
             let x = setInterval(function() {
                 const now = new Date().getTime();
